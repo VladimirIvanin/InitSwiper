@@ -1,0 +1,29 @@
+{
+  "name": "InitSwiper",
+  "version": "0.2.2",
+  "description": "Плагин для работы со слайдером на платформе InSales",
+  "main": "dist/InitSwiper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node node_modules/isoptera -c config/dev.yaml -u http://shop-48497.myinsales.ru/",
+    "dist": "node node_modules/isoptera -c config/dist.yaml"
+  },
+  "author": "Vladimir Ivanin",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "errorify": "^0.3.1",
+    "eslintify": "^3.1.0",
+    "isoptera": "0.1.0",
+    "jstify": "^0.14.0",
+    "lodash": "^4.17.4",
+    "nocommentify": "0.0.4",
+    "partialify": "^3.1.6",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "browserify-banner": "^1.0.5",
+    "minifyify": "^7.3.5",
+    "uglifyify": "^4.0.2"
+  }
+}

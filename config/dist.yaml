@@ -1,0 +1,25 @@
+source: source/index.js
+dist: dist/InitSwiper.js
+
+bfPlugins:
+  - name: errorify
+  - name: browserify-banner
+    options:
+      file: dist/InitSwiper.js
+      template: "<%= pkg.name %> v<%= pkg.version %>\n<%= pkg.author.name %>\n<%= moment().year() %>"
+      pkg:
+        name: 'InitSwiper'
+        version: '0.2.2'
+        author:
+          name: 'Vladimir Ivanin'
+
+bfTransforms:
+  - name: eslintify
+    options:
+      passthrough: [ 'errors', 'warnings' ]
+  - name: jstify
+    options:
+      engine: global
+  - name: uglifyify
+    options:
+      sourceMap: false
