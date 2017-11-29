@@ -18,7 +18,8 @@ function init($container) {
 
 
   var uniqueClass = '.' + 'slider-' + _uuid;
-  var selector =  uniqueClass + ' .swiper-container';
+  var uniqueClassContainer = '.' + 'container-' + _uuid;
+  var selector =  uniqueClass + ' .swiper-container' + uniqueClassContainer;
   var $nextButton = uniqueClass + ' .swiper-button-next';
   var $prevButton = uniqueClass + ' .swiper-button-prev';
   var sliderLength = $container.find('.swiper-slide').length;
@@ -28,12 +29,14 @@ function init($container) {
     $parent = $container.parents(_parent + ':first');
   }
   $container.addClass(uniqueClass.replace('.', ''));
+  $container.find('.swiper-container').eq(0).addClass(uniqueClassContainer.replace('.', ''));
 
   var mainSliderLength = 4;
-  var containerParent = $(selector).parents(':visible').width();
-  var containerWidth = $(selector).width();
+  var $swiperContainer = $(selector).eq(0);
+  var containerParent = $swiperContainer.parents(':visible').width();
+  var containerWidth = $swiperContainer.width();
   if (containerWidth == 0) {
-    containerWidth = (containerParent > 0) ? containerParent : $(selector).parent().parent().width();
+    containerWidth = (containerParent > 0) ? containerParent : $swiperContainer.parent().parent().width();
   }
 
   if (options.autoLength) {
