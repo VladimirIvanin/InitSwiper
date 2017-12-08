@@ -1,6 +1,6 @@
 {
   "name": "InitSwiper",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Плагин для работы со слайдером на платформе InSales",
   "main": "dist/InitSwiper.js",
   "scripts": {

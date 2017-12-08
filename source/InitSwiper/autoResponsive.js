@@ -1,6 +1,6 @@
 /* global $, _ */
 
-function autoResponsive(options) {
+function autoResponsive(options, containerWidth) {
   var result = {};
 
   var _breakpoints = options.maxBreakpoint;
@@ -13,6 +13,7 @@ function autoResponsive(options) {
   $.each(Array(_points), function(index, el) {
     var _breakpoint = _breakpoints - (pointsLength * index);
     var slidesPerView = _.floor(_breakpoint / minCartWidth);
+
     if (slidesPerView < 1) {
       slidesPerView = 1;
     }

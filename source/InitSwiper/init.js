@@ -5,17 +5,20 @@ var generateUUID = require('./help').generateUUID;
 
 /**
  * Инициализация слайдера
- * @param  {jquery object} $container $('.main-slider') селектор блока со слайдером. не swiper-container, а его родитель
+ * @param  {jquery object} _container $('.main-slider') селектор блока со слайдером. не swiper-container, а его родитель
  * @param  {object} options настройки для свайпера
  * @return {instance} Созданный инстанс слайдера
 */
-function init($container) {
+function init(_container) {
   var self = this;
+  var isSwiper = _container.hasClass('swiper-container')
+  var $slider = (isSwiper) ? $container : _container.find('.swiper-container');
+  var $container = (isSwiper) ? _container.parent() : _container;
+
 
   var _uuid = generateUUID();
   var options = self.options;
   var instance = ($container[0] && $container[0].swiper) ? $container[0].swiper : null;
-
 
   var uniqueClass = '.' + 'slider-' + _uuid;
   var uniqueClassContainer = '.' + 'container-' + _uuid;
@@ -31,7 +34,7 @@ function init($container) {
   $container.addClass(uniqueClass.replace('.', ''));
   $container.find('.swiper-container').eq(0).addClass(uniqueClassContainer.replace('.', ''));
 
-  var mainSliderLength = 4;
+  var mainSliderLength = 1;
   var $swiperContainer = $(selector).eq(0);
   var containerParent = $swiperContainer.parents(':visible').width();
   var containerWidth = $swiperContainer.width();
@@ -54,7 +57,7 @@ function init($container) {
       console.warn('Проверьте свойство autoResponsive, autoResponsive работает некорректно для не адаптивных сайтов', $container);
       console.trace();
     }
-    breakpoints = autoResponsive(options);
+    breakpoints = autoResponsive(options, containerWidth);
   }
 
   var defaultOptions = {
