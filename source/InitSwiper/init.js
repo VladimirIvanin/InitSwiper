@@ -2,6 +2,7 @@
 
 var autoResponsive = require('./autoResponsive');
 var generateUUID = require('./help').generateUUID;
+var patchNumber = require('./help').patchNumber;
 
 /**
  * Инициализация слайдера
@@ -42,6 +43,8 @@ function init(_container) {
     containerWidth = (containerParent > 0) ? containerParent : $swiperContainer.parent().parent().width();
   }
 
+  options.$swiperContainer = $swiperContainer;
+
   if (options.autoLength) {
     mainSliderLength = _.floor( containerWidth / options.minCartWidth );
     if (mainSliderLength < 1) {
@@ -52,12 +55,12 @@ function init(_container) {
   var breakpoints = {};
   if (options.autoResponsive) {
     var winWidth = $(window).width();
-    var isResponsive = winWidth >= (containerWidth + 50);
+    var isResponsive = (patchNumber($("body").css('min-width')) < 480);
     if (isResponsive == false) {
       console.warn('Проверьте свойство autoResponsive, autoResponsive работает некорректно для не адаптивных сайтов', $container);
       console.trace();
     }
-    breakpoints = autoResponsive(options, containerWidth);
+    breakpoints = autoResponsive(options, containerWidth, winWidth);
   }
 
   var defaultOptions = {
