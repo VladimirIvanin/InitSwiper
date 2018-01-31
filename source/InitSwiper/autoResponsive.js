@@ -55,7 +55,6 @@ function autoResponsive(options, containerWidth, winWidth) {
       }
     }
   });
-  console.log(result);
 
   return result;
 }
