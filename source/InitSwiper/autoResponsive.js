@@ -11,10 +11,6 @@ function autoResponsive(options, containerWidth, winWidth) {
   var pointsLength = 20;
 
   var _points = _.floor(_breakpoints / pointsLength);
-  var globalContainer = $(".container").css('max-width');
-  if (globalContainer) {
-    globalContainer = patchNumber(globalContainer);
-  }
 
   $.each(Array(_points), function(index, el) {
     var _breakpoint = _breakpoints - (pointsLength * index);
@@ -31,11 +27,7 @@ function autoResponsive(options, containerWidth, winWidth) {
         paddings = paddings + patchNumber($(el).css('padding-left'));
         paddings = paddings + patchNumber($(el).css('padding-right'));
       });
-      if (_breakpoint < globalContainer) {
-        _breakpointWidth = _breakpoint - paddings;
-      }else{
-        _breakpointWidth = globalContainer - paddings;
-      }
+      _breakpointWidth = _breakpoint - paddings;
     }
 
     if (!withContainer) {
