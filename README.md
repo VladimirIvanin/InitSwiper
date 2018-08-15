@@ -12,14 +12,7 @@
 var sliders = InitSwiper($('.main-slider'), {
   autoLength: true, // автоматически выставить кол-во слайдов исходя из минимальной ширины карточки
   minCartWidth: 280, // Минимальная ширина карточки
-  autoResponsive: false // Автоматически расчитать респонсив для слайдера
 })
-
-var mySliders = InitSwiper('.main-slider', {
-  autoLength: true, // автоматически выставить кол-во слайдов исходя из минимальной ширины карточки
-  minCartWidth: 280, // Минимальная ширина карточки
-  autoResponsive: true // Автоматически расчитать респонсив для слайдера
-});
 
 ```
 
