@@ -13,11 +13,18 @@
  * @return {Array instance} Массив инстансов слайдера
 */
 
+<<<<<<< HEAD
 var mySliders = InitSwiper('.main-slider', {
   autoLength: true, // автоматически выставить кол-во слайдов исходя из минимальной ширины карточки
   minCartWidth: 280, // Минимальная ширина карточки
   autoResponsive: true // Автоматически расчитать респонсив для слайдера
 });
+=======
+var sliders = InitSwiper($('.main-slider'), {
+  autoLength: true, // автоматически выставить кол-во слайдов исходя из минимальной ширины карточки
+  minCartWidth: 280, // Минимальная ширина карточки
+})
+>>>>>>> e976cfd7dcaea280312e4b50d46c35dae2bf41dc
 
 ```
 
