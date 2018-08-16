@@ -9,7 +9,7 @@ bfPlugins:
       template: "<%= pkg.name %> v<%= pkg.version %>\n<%= pkg.author.name %>\n<%= moment().year() %>"
       pkg:
         name: 'InitSwiper'
-        version: '0.2.6'
+        version: '0.2.7'
         author:
           name: 'Vladimir Ivanin'
 

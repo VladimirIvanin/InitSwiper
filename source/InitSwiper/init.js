@@ -1,7 +1,9 @@
 /* global $, Swiper */
 
-var autoResponsive = require('./autoResponsive');
+var debounce = require('./help').debounce;
+var slideLength = require('./help').slideLength;
 var generateUUID = require('./help').generateUUID;
+var getContainerWidth = require('./help').getContainerWidth;
 var patchNumber = require('./help').patchNumber;
 
 /**
@@ -37,30 +39,12 @@ function init(_container) {
 
   var mainSliderLength = 1;
   var $swiperContainer = $(selector).eq(0);
-  var containerParent = $swiperContainer.parents(':visible').width();
-  var containerWidth = $swiperContainer.width();
-  if (containerWidth == 0) {
-    containerWidth = (containerParent > 0) ? containerParent : $swiperContainer.parent().parent().width();
-  }
+  var containerWidth = getContainerWidth($swiperContainer)
 
   options.$swiperContainer = $swiperContainer;
 
   if (options.autoLength) {
-    mainSliderLength = _.floor( containerWidth / options.minCartWidth );
-    if (mainSliderLength < 1) {
-      mainSliderLength = 1;
-    }
-  }
-
-  var breakpoints = {};
-  if (options.autoResponsive) {
-    var winWidth = $(window).width();
-    var isResponsive = (patchNumber($("body").css('min-width')) < 480);
-    if (isResponsive == false) {
-      console.warn('Проверьте свойство autoResponsive, autoResponsive работает некорректно для не адаптивных сайтов', $container);
-      console.trace();
-    }
-    breakpoints = autoResponsive(options, containerWidth, winWidth);
+    mainSliderLength = slideLength( containerWidth, options.minCartWidth );
   }
 
   var defaultOptions = {
@@ -75,8 +59,7 @@ function init(_container) {
       el: uniqueClass + ' .swiper-pagination',
       type: 'bullets',
       clickable: true
-    },
-    breakpoints: breakpoints
+    }
   }
 
   var sliderOption = $.extend(true, defaultOptions, options);
@@ -104,6 +87,16 @@ function init(_container) {
     $parent.on('mouseenter', function(event) {
       slider.update(true);
     });
+  }
+
+  if (options.autoResponsive) {
+    $(window).on('resize', debounce(function(event) {
+      if (typeof slider.params != 'undefined') {
+        containerWidth = getContainerWidth($swiperContainer)
+        slider.params.slidesPerView = slideLength( containerWidth, options.minCartWidth );
+        slider.update(true);
+      }
+    }, 150));
   }
 
   return slider;
