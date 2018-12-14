@@ -1,5 +1,5 @@
 /*!
- * InitSwiper v0.2.7
+ * InitSwiper v0.2.8
  * Vladimir Ivanin
  * 2018
  */
