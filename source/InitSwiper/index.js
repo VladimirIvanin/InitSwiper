@@ -11,6 +11,10 @@ var InitSwiper = function (container, options) {
 
   self.init = init;
 
+  if (typeof Swiper == 'undefined') {
+    console.warn('Отсутствует плагин Swiper')
+  }
+
   var $container = (typeof container == 'string') ? $(container) : container;
 
   $container.each(function(index, el) {

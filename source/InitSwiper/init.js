@@ -4,7 +4,6 @@ var debounce = require('./help').debounce;
 var slideLength = require('./help').slideLength;
 var generateUUID = require('./help').generateUUID;
 var getContainerWidth = require('./help').getContainerWidth;
-var patchNumber = require('./help').patchNumber;
 
 /**
  * Инициализация слайдера
@@ -15,7 +14,6 @@ var patchNumber = require('./help').patchNumber;
 function init(_container) {
   var self = this;
   var isSwiper = _container.hasClass('swiper-container')
-  var $slider = (isSwiper) ? $container : _container.find('.swiper-container');
   var $container = (isSwiper) ? _container.parent() : _container;
 
 
@@ -59,6 +57,20 @@ function init(_container) {
       el: uniqueClass + ' .swiper-pagination',
       type: 'bullets',
       clickable: true
+    }
+  }
+
+  if (!Swiper.options) {
+    defaultOptions.nextButton = $nextButton;
+    defaultOptions.prevButton = $prevButton;
+    defaultOptions.pagination = uniqueClass + ' .swiper-pagination';
+  }
+
+  var isInsales = (typeof Site !== 'undefined' && typeof Site.menuConfig !== 'undefined' && typeof Site.alertifyConfig !== 'undefined')
+  if (typeof Swiper.name != 'undefined' && Swiper.name == 'Factory' && isInsales) {
+    $container.find('.swiper-slide').attr('data-slider-slide', '');
+    if ($container.find('.swiper-slide').parent('.swiper-wrapper').length) {
+      $container.find('.swiper-slide').unwrap('.swiper-wrapper');
     }
   }
 
